@@ -10,10 +10,12 @@ export class Demo extends Component {
     this.state = {
       hidden: false,
     }
+    this.hidePopup = this.hidePopup.bind(this)
   }
 
-  hidePopup() {
-    this.setState({ hidden: false })
+  hidePopup(e) {
+    this.setState({ hidden: true })
+    e.preventDefault()
   }
 
   render() {
@@ -27,7 +29,8 @@ export class Demo extends Component {
       <div className="Demo">
         {!this.state.hidden ? (
           <div className="Overlay">
-            <span>{popup.message}</span>
+            <span className="PopupMessage">{popup.message}</span>
+            <button onClick={this.hidePopup}>CLOSE</button>
           </div>
         ) : (
           ''
