@@ -14,3 +14,17 @@ export function getPopup() {
       return res
     })
 }
+
+export function updatePopup(message) {
+  const apiUrl = 'http://localhost:8001'
+  return axios
+    .post(apiUrl + '/popup', { message: message })
+    .then(res => {
+      console.log(res)
+      return res.data
+    })
+    .catch(res => {
+      console.log(res)
+      return res
+    })
+}
