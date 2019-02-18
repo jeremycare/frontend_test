@@ -1,0 +1,10 @@
+.Demo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Overlay {
+  flex: 1;
+  max-width: 50%;
+}
