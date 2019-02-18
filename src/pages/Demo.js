@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import { getPopup } from '../lib/popup'
+import 'babel-polyfill'
 
 import './Demo.css'
 
@@ -9,8 +10,14 @@ export class Demo extends Component {
     super()
     this.state = {
       hidden: false,
+      popup: null,
     }
     this.hidePopup = this.hidePopup.bind(this)
+  }
+
+  async componentDidMount() {
+    const popup = await getPopup()
+    this.setState({ popup: popup })
   }
 
   hidePopup(e) {
@@ -19,17 +26,16 @@ export class Demo extends Component {
   }
 
   render() {
-    const popup = getPopup()
-
     /**
      * Step 1: Render popup message in an overlay
      */
-    console.log(popup)
     return (
-      <div className="Demo">
+      <div className="Demo" onClick={this.printer}>
         {!this.state.hidden ? (
           <div className="Overlay">
-            <span className="PopupMessage">{popup.message}</span>
+            <span className="PopupMessage">
+              {this.state.popup ? this.state.popup.message : ''}
+            </span>
             <button onClick={this.hidePopup}>CLOSE</button>
           </div>
         ) : (
